@@ -115,7 +115,7 @@ Now that we know what we're looking for, let's use `html_elements()` to identify
 *Replace 'tba'in code chunk underneath with the appropriate selector*
 
 ```{r}
-table_raw <- html_elements(html, css = 'tba')
+table_raw <- html_elements(html, css = 'table.sortable:nth-child(30)')
 length(table_raw) # now a list of length 1
 ```
 
@@ -130,9 +130,9 @@ As in the previous case, we still need to clean the data before we can use it. F
 
 ```{r}
 data_pop <- data_pop %>%
-  select("City", "2022estimate") %>%
+  select("City", "2023estimate") %>%
   filter(row_number() != 1) %>% # removing first row as it repeats the header
-  mutate(`2022rank` = row_number()) # using the row number as rank since the table is ranked
+  mutate(`2023rank` = row_number()) # using the row number as rank since the table is ranked
 ```
 
 Renaming and cleaning columns:
@@ -140,8 +140,8 @@ Renaming and cleaning columns:
 ```{r}
 # Renaming the columns
 data_pop <- rename(data_pop, city_name = "City",
-                   rank = "2022rank",
-                   population = "2022estimate")
+                   rank = "2023rank",
+                   population = "2023estimate")
 
 # Removing superscripts in the city names
 data_pop$city_name <- gsub("\\[.*\\]", "", data_pop$city_name)

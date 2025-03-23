@@ -231,14 +231,15 @@ driver$navigate("https://www.ed.ac.uk/finance/transparency/foi/investments")
 
 We need to deal with pop up on cookies. 
 First we need to select our cookies settings
-```{r}
-cookies_tick1 <- driver$findElement(using = "css", value = "#edgel-cookie-setting-2")
+```{r, eval=FALSE}
+#It does not work
+cookies_tick1 <- driver$findElement(using = "css", value = "#uoe-consent-setting-2")
 
 cookies_tick1$clickElement()
 
 Sys.sleep(1) # give it some time
 
-cookies_tick2 <- driver$findElement(using = "css", value = "#edgel-cookie-setting-4")
+cookies_tick2 <- driver$findElement(using = "css", value = "#uoe-consent-setting-4")
 
 cookies_tick2$clickElement()
 ```
@@ -277,7 +278,7 @@ As an exercise, the XPaths of the relevant elements have to be obtained with the
 #driver$switchToFrame(0) # can be un-commented and tried if code does not run
 
 # note the use of single quotes around 'tba' -- this is because the xpath will sometimes include double quotes. if you have double quotes inside a string, you need to use single quotes to define the extent of the string.
-agree_button <- driver$findElement(using = "xpath", value = 'tba')
+agree_button <- driver$findElement(using = "xpath", value = '/html/body/div[2]/div[2]/div[3]/span/div/div/div/div[3]/div[1]/button[2]/div')
 agree_button$clickElement()
 
 #driver$switchToFrame(1)
@@ -285,7 +286,7 @@ agree_button$clickElement()
 
 
 ```{r, eval = FALSE, echo = TRUE}
-search_field <- driver$findElement(using = "xpath", value = 'tba')
+search_field <- driver$findElement(using = "xpath", value = '//*[@id="APjFqb"]')
 search_field$sendKeysToElement(list("University of Edinburgh"))
 Sys.sleep(1)
 search_field$sendKeysToElement(list(key = "enter"))
@@ -294,7 +295,7 @@ search_field$sendKeysToElement(list(key = "enter"))
 And navigate to the University of Edinburgh website by clicking on the first link of the search results:
 
 ```{r, eval = FALSE, echo = TRUE}
-first_link <- driver$findElement(using = "xpath", value = 'tba')
+first_link <- driver$findElement(using = "xpath", value = '//*[@id="gsr"]')
 first_link$clickElement()
 ```
 
@@ -312,4 +313,3 @@ rD$server$stop()
 
 ### More in-depth example
 [Scraping using Selenium: MY472 Data for data scientists (LSE)](https://lse-my472.github.io/week07/03-selenium-lse.Rmd)
-
